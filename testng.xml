@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestNGSuite" parallel="tests" thread-count="1">
+  <test name="Test 1">
+    <groups>
+      <run>
+        <include name="1"></include>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.globantu.automation.maximiliano_gigena.TestClass"/>
+    </classes>
+  </test>
+  <test name="Test 2">
+    <groups>
+      <run>
+        <include name="2"></include>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.globantu.automation.maximiliano_gigena.TestClass"/>
+    </classes>
+  </test>
+  <test name="Test 3">
+    <groups>
+      <run>
+        <include name="3"></include>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.globantu.automation.maximiliano_gigena.TestClass"/>
+    </classes>
+  </test>
+  <test name="Test 4">
+    <groups>
+      <run>
+        <include name="4"></include>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.globantu.automation.maximiliano_gigena.TestClass"/>
+    </classes>
+  </test>
+  <test name="Test 5">
+    <groups>
+      <run>
+        <include name="5"></include>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.globantu.automation.maximiliano_gigena.TestClass"/>
+    </classes>
+  </test>
+</suite>
