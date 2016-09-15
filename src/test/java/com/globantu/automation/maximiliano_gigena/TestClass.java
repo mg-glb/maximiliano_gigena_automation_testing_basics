@@ -24,7 +24,10 @@ public class TestClass {
   public static Calendar calendar;
   public static int dayToday;
   public static int monthToday;
-  public static int yearToday;
+  public static int dayDeparture;
+  public static int monthDeparture;
+  public static int dayReturn;
+  public static int monthReturn;
 
   public TestClass() {}
 
@@ -35,7 +38,37 @@ public class TestClass {
     calendar.setTime(today);
     dayToday = calendar.get(Calendar.DAY_OF_MONTH);
     monthToday = calendar.get(Calendar.MONTH);
-    yearToday = calendar.get(Calendar.YEAR);
+    if (dayToday > 28) {
+      dayDeparture = 1;
+      if (monthToday > 9) {
+        monthDeparture = calendar.get(Calendar.MONTH) % 3;
+      } else {
+        monthDeparture = calendar.get(Calendar.MONTH) + 3;
+      }
+
+    } else {
+      dayDeparture = calendar.get(Calendar.DAY_OF_MONTH);
+      if (monthToday > 9) {
+        monthDeparture = calendar.get(Calendar.MONTH) % 2;
+      } else {
+        monthDeparture = calendar.get(Calendar.MONTH) + 2;
+      }
+    }
+    if (dayToday > 28) {
+      dayReturn = 1;
+      if (monthToday > 7) {
+        monthReturn = calendar.get(Calendar.MONTH) % 4;
+      } else {
+        monthReturn = calendar.get(Calendar.MONTH) + 4;
+      }
+    } else {
+      dayReturn = calendar.get(Calendar.DAY_OF_MONTH);
+      if (monthToday > 8) {
+        monthReturn = calendar.get(Calendar.MONTH) % 3;
+      } else {
+        monthReturn = calendar.get(Calendar.MONTH) + 3;
+      }
+    }
   }
 
   @BeforeTest(alwaysRun = true)
@@ -55,6 +88,7 @@ public class TestClass {
   public void bookFlight() {
     hp.go();
     hp.selectDepartureDate();
+    hp.selectReturnDate();
     System.out.println("Initiating test case number 1");
     Assert.assertTrue(true);
   }
