@@ -45,7 +45,12 @@ public class HomePage {
   private void determineDepartureDate() {
     if (TestClass.dayToday >= 30) {
       if (TestClass.monthToday >= 10) {
-        //TODO Analyze the case for last days of November and December.
+        // TODO Analyze the case for last days of November and December.
+        calendarNext.click();
+        availableDepartDates.stream()
+            .filter(we -> we.getAttribute("data-day").equals("1")
+                && we.getAttribute("data-month").equals(Integer.toString(TestClass.monthToday % 2)))
+            .findFirst().get().click();
       } else {
         calendarNext.click();
         availableDepartDates.stream()
@@ -56,7 +61,7 @@ public class HomePage {
     } else if (TestClass.monthToday >= 10) {
       availableDepartDates.stream()
           .filter(we -> we.getAttribute("data-day").equals(Integer.toString(TestClass.dayToday))
-              && we.getAttribute("data-month").equals(Integer.toString(TestClass.monthToday%2)))
+              && we.getAttribute("data-month").equals(Integer.toString(TestClass.monthToday % 2)))
           .findFirst().get().click();
     } else {
       availableDepartDates.stream()
