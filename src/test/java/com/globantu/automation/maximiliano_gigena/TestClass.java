@@ -73,7 +73,7 @@ public class TestClass {
 
   @BeforeTest(alwaysRun = true)
   public void setUpDriver() {
-    System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+    System.setProperty("webdriver.chrome.driver", System.getenv("DRIVERS")+"\\chromedriver.exe");
     driver = new ChromeDriver();
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
   }
