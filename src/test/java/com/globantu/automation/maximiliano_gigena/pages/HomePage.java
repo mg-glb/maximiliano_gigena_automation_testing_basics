@@ -1,5 +1,6 @@
 package com.globantu.automation.maximiliano_gigena.pages;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -24,11 +25,11 @@ public class HomePage {
   private WebElement returningDate;
   @FindBy(css = ".datepicker-paging.datepicker-next.btn-paging.btn-secondary.next")
   private WebElement calendarNext;
-  @FindAll({@FindBy(css = ".datepicker-cal-date")})
+  @FindAll({@FindBy(css = ".datepicker-cal-date:not(.disabled)")})
   private List<WebElement> availableDepartDates;
 
-  public HomePage(WebDriver driver) {
-    this.driver = driver;
+  public HomePage(WebDriver driver1) {
+    driver = driver1;
   }
 
   public void go() {
@@ -38,19 +39,29 @@ public class HomePage {
   public void selectDepartureDate() {
     departDate.click();
     calendarNext.click();
-    determineDates(TestClass.dayDeparture, TestClass.monthDeparture);
+    determineDeparture(TestClass.dayDeparture, TestClass.monthDeparture);
   }
 
   public void selectReturnDate() {
     returningDate.click();
-    calendarNext.click();
-    determineDates(TestClass.dayReturn, TestClass.monthReturn);
+    determineReturn();
   }
 
-  private void determineDates(int day, int month) {
-    availableDepartDates.stream()
-        .filter(we -> we.getAttribute("data-day").equals(Integer.toString(day))
-            && we.getAttribute("data-month").equals(Integer.toString(month)))
-        .findFirst().get().click();
+  private void determineDeparture(int day, int month) {
+    for(WebElement we: availableDepartDates){
+      if(we.getAttribute("data-day").equals(Integer.toString(day))&& we.getAttribute("data-month").equals(Integer.toString(month))){
+        we.click();
+        break;
+      }
+    }
+  }
+
+  private void determineReturn() {
+    Iterator<WebElement> itr = availableDepartDates.iterator();
+    WebElement returnDate=null;
+    while(itr.hasNext()){
+      returnDate= itr.next();
+    }
+    returnDate.click();
   }
 }
